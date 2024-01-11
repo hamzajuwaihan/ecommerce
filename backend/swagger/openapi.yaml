@@ -1,0 +1,132 @@
+openapi: 3.0.1
+info:
+  title: Ecommerce API
+  version: 1.0.0
+  description: Illustration of the ecommerce website APIs.
+paths:
+  /products:
+    summary: products related APIs
+    description: >-
+      This will be the main entry for products operations and will explain HTTP
+      methods that can be done on products.
+    get:
+      summary: get all products.
+      description: this will get all available products in the DB.
+      operationId: getAllProducts
+      responses:
+        '200':
+          description: >-
+            A successful api result will contain zero or more products depending
+            on products table.
+          content:
+            application/json:
+              examples:
+                all products res:
+                  value: |
+                    [
+                      {
+                        "id": 12,
+                        "product_name": "Microwave Oven",
+                        "description": "Microwave works with optimal electricity consumption.",
+                        "stock_quantity": 50,
+                        "min_stock": 20,
+                        "max_stock": 200,
+                        "category_id": 5,
+                        "created_at": "2024-12-01T01:51:00.000Z",
+                        "updated_at": "2024-12-01T15:52:00.000Z"
+                      },
+                      {
+                        "id": 13,
+                        "product_name": "Smartphone",
+                        "description": "High-performance smartphone with advanced features.",
+                        "stock_quantity": 100,
+                        "min_stock": 30,
+                        "max_stock": 150,
+                        "category_id": 3,
+                        "created_at": "2024-12-01T08:15:00.000Z",
+                        "updated_at": "2024-12-01T18:42:00.000Z"
+                      },
+                      {
+                        "id": 14,
+                        "product_name": "Wireless Headphones",
+                        "description": "Bluetooth headphones with noise-cancellation technology.",
+                        "stock_quantity": 30,
+                        "min_stock": 10,
+                        "max_stock": 100,
+                        "category_id": 2,
+                        "created_at": "2024-12-01T11:30:00.000Z",
+                        "updated_at": "2024-12-01T14:20:00.000Z"
+                      }
+                    ]
+        default:
+          description: Default error sample response
+      tags:
+        - Products
+    post:
+      summary: It will add a new product in DB.
+      description: >-
+        If all required information are present, then a new id will be generated
+        along with the provided product information as a record in DB.
+      operationId: postNewProduct
+      responses:
+        '200':
+          description: A successful api result will contain the new returned product.
+          content:
+            application/json:
+              examples:
+                successful new product response:
+                  value: |
+                    {
+                      "id": 15,
+                      "product_name": "UltraBook Pro",
+                      "description": "Slim and powerful ultrabook for professional use.",
+                      "stock_quantity": 75,
+                      "min_stock": 25,
+                      "max_stock": 200,
+                      "category_id": 1,
+                      "created_at": "2024-12-02T09:30:00.000Z",
+                      "updated_at": "2024-12-02T12:45:00.000Z"
+                    }
+        default:
+          description: Default error sample response
+      tags:
+        - Products
+  /Products/{id}:
+    summary: This path is for specific product.
+    description: Will get all information about the specified product with category name.
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The ID of the product to retrieve.
+        schema:
+          type: integer
+    get:
+      summary: Get product by ID.
+      description: Retrieves a specific product based on the provided ID.
+      operationId: 'operationId: getProductById'
+      responses:
+        '200':
+          description: >-
+             successful response of a specific product.
+          content:
+            application/json:
+              examples:
+                A successful API result will contain the detailed information about the specified product.:
+                  value: |-
+                    {
+                    "id": 15,
+                    "product_name": "UltraBook Pro",
+                    "description": "Slim and powerful ultrabook for professional use.",
+                    "stock_quantity": 75,
+                    "min_stock": 25,
+                    "max_stock": 200,
+                    "category_id": 1,
+                    "category_name":"Electronics",
+                    "created_at": "2024-12-02T09:30:00.000Z",
+                    "updated_at": "2024-12-02T12:45:00.000Z"
+                    }
+        default:
+          description: Default error sample response
+      tags:
+        - Products
