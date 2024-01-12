@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: Illustration of the ecommerce website APIs.
 paths:
-  /products:
+  /api/products:
     summary: products related APIs
     description: >-
       This will be the main entry for products operations and will explain HTTP
@@ -13,6 +13,19 @@ paths:
       summary: get all products.
       description: this will get all available products in the DB.
       operationId: getAllProducts
+      parameters:
+        - in: query
+          name: page
+          required: false
+          description: The page number for pagination.
+          schema:
+            type: integer
+        - in: query
+          name: pageSize
+          required: false
+          description: The number of items per page.
+          schema:
+            type: integer
       responses:
         '200':
           description: >-
@@ -24,40 +37,41 @@ paths:
                 all products res:
                   value: |
                     [
-                      {
-                        "id": 12,
-                        "product_name": "Microwave Oven",
-                        "description": "Microwave works with optimal electricity consumption.",
-                        "stock_quantity": 50,
-                        "min_stock": 20,
-                        "max_stock": 200,
-                        "category_id": 5,
-                        "created_at": "2024-12-01T01:51:00.000Z",
-                        "updated_at": "2024-12-01T15:52:00.000Z"
-                      },
-                      {
-                        "id": 13,
-                        "product_name": "Smartphone",
-                        "description": "High-performance smartphone with advanced features.",
-                        "stock_quantity": 100,
-                        "min_stock": 30,
-                        "max_stock": 150,
-                        "category_id": 3,
-                        "created_at": "2024-12-01T08:15:00.000Z",
-                        "updated_at": "2024-12-01T18:42:00.000Z"
-                      },
-                      {
-                        "id": 14,
-                        "product_name": "Wireless Headphones",
-                        "description": "Bluetooth headphones with noise-cancellation technology.",
-                        "stock_quantity": 30,
-                        "min_stock": 10,
-                        "max_stock": 100,
-                        "category_id": 2,
-                        "created_at": "2024-12-01T11:30:00.000Z",
-                        "updated_at": "2024-12-01T14:20:00.000Z"
-                      }
-                    ]
+                     {
+                         "id": 1,
+                         "product_name": "Laptop X1",
+                         "description": "Powerful laptop for professional use",
+                         "stock_quantity": 100,
+                         "min_stock": 10,
+                         "max_stock": 150,
+                         "category_id": 1,
+                         "created_at": "2024-01-06T19:21:38.831Z",
+                         "updated_at": "2024-01-06T19:21:38.831Z",
+                         "category_name": "Electronics",
+                         "image_url": "image_url_1"
+                     },
+                     {
+                         "id": 2,
+                         "product_name": "Cotton T-Shirt",
+                         "description": "Comfortable cotton T-shirt",
+                         "stock_quantity": 200,
+                         "min_stock": 20,
+                         "max_stock": 300,
+                         "category_id": 2,
+                         "created_at": "2024-01-06T19:21:38.831Z",
+                         "updated_at": "2024-01-06T19:21:38.831Z",
+                         "category_name": "Clothing",
+                         "image_url": "image_url_2"
+                     }
+                     ]
+        '204':
+          description: >-
+            this happens when the DB has no products available.
+          content:
+            application/json:
+              examples:
+                no available products.:
+                  value: '{}'
         default:
           description: Default error sample response
       tags:
@@ -91,7 +105,7 @@ paths:
           description: Default error sample response
       tags:
         - Products
-  /Products/{id}:
+  /api/products/{id}:
     summary: This path is for specific product.
     description: Will get all information about the specified product with category name.
     parameters:
@@ -107,25 +121,44 @@ paths:
       operationId: 'operationId: getProductById'
       responses:
         '200':
-          description: >-
-             successful response of a specific product.
+          description: successful response of a specific product.
           content:
             application/json:
               examples:
                 A successful API result will contain the detailed information about the specified product.:
-                  value: |-
+                  value: >-
                     {
+
                     "id": 15,
+
                     "product_name": "UltraBook Pro",
-                    "description": "Slim and powerful ultrabook for professional use.",
+
+                    "description": "Slim and powerful ultrabook for professional
+                    use.",
+
                     "stock_quantity": 75,
+
                     "min_stock": 25,
+
                     "max_stock": 200,
+
                     "category_id": 1,
+
                     "category_name":"Electronics",
+
                     "created_at": "2024-12-02T09:30:00.000Z",
+
                     "updated_at": "2024-12-02T12:45:00.000Z"
+
                     }
+        '404':
+          description: >-
+            no product was found with the provided id.
+          content:
+            application/json:
+              examples:
+                product is not found:
+                  value: '{ "error": "Product not found" }'
         default:
           description: Default error sample response
       tags:
