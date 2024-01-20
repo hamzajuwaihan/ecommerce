@@ -65,8 +65,7 @@ paths:
                      }
                      ]
         '204':
-          description: >-
-            this happens when the DB has no products available.
+          description: this happens when the DB has no products available.
           content:
             application/json:
               examples:
@@ -152,8 +151,7 @@ paths:
 
                     }
         '404':
-          description: >-
-            no product was found with the provided id.
+          description: no product was found with the provided id.
           content:
             application/json:
               examples:
@@ -163,3 +161,127 @@ paths:
           description: Default error sample response
       tags:
         - Products
+  /api/auth/login:
+    summary: Path for authentication purposes
+    description: Login route will validate user infromation.
+    post:
+      summary: Route for validating information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      description: 'This route enables user to login to website thus having its own cookie that includes a session id.'
+      operationId: Login
+      responses:
+        '200':
+          description: The user is valid.
+          content:
+            application/json:
+              examples:
+                Successful authentication response, it will include a cookie.:
+                  value: |-
+                    {
+                        "message": "Login successful"
+                    }
+          
+        default:
+          description: Default error sample response
+      tags:
+        - Authentication
+  /api/auth/logout:
+    delete:
+      summary: Route for logging out
+      description: 'This route logs out the authenticated user, clearing the session.'
+      operationId: Logout
+      responses:
+        '200':
+          description: Logout successful
+          content:
+            application/json:
+              examples:
+                Successful logout response:
+                  value: |-
+                    {
+                        "message": "Logout successful"
+                    }
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized response:
+                  value: |-
+                    {
+                        "message": "Not authenticated"
+                    }
+        default:
+          description: Default error sample response
+      tags:
+        - Authentication
+  /api/auth/register:
+    post:
+      summary: Route for registering a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - email
+                - password
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      description: 'This route allows a new user to register.'
+      operationId: Register
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              examples:
+                Successful registration response:
+                  value: |-
+                    {
+                        "message": "User created"
+                    }
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              examples:
+                Bad request response:
+                  value: |-
+                    {
+                        "message": "User with this email already exists."
+                    }
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              examples:
+                Internal server error response:
+                  value: |-
+                    {
+                        "message": "Error registering user"
+                    }
+        default:
+          description: Default error sample response
+      tags:
+        - Authentication

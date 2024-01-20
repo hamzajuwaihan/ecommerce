@@ -2,6 +2,7 @@ const db = require("../db");
 
 const getAllProducts = async (req, res) => {
   try {
+
     const page = req.query.page || 1;
     const pageSize = req.query.pageSize || 10; // Adjust the page size as needed
     const offset = (page - 1) * pageSize;
