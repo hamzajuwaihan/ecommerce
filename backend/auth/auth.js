@@ -24,7 +24,7 @@ router.post("/login", (req, res, next) => {
       }
 
       // Send a custom success response
-      return res.json({ message: "Login successful"});
+      return res.json({ message: "Login successful" });
     });
   })(req, res, next);
 });
@@ -81,7 +81,16 @@ router.delete("/logout", (req, res) => {
     if (err) {
       return res.status(500).json({ error: "Logout error" });
     }
-    res.json({ message: "Logout successful" });
+
+    // Destroy the session after logging out
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(500).json({ error: "Session destruction error" });
+      }
+
+      res.json({ message: "Logout successful" });
+    });
   });
 });
+
 module.exports = router;
