@@ -1,13 +1,24 @@
-import FeaturedProducts from "./FeaturedProducts";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import FeaturedProducts from "./FeaturedProducts"; // Adjust the path based on your actual file structure
+import { fetchFeaturedProducts } from "../../features/featuredProductsSlice"; // Adjust the path based on your actual file structure
+
 function FeaturedProductsContainer() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const { featuredProducts, loading, error } = useSelector(
+    (state) => state.featuredProducts
+  );
+
+  useEffect(() => {
+    // Dispatch the fetchFeaturedProducts action when the component mounts
+    dispatch(fetchFeaturedProducts());
+  }, [dispatch]);
 
   return (
     <>
-      <FeaturedProducts />
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+      {!loading && !error && <FeaturedProducts products={featuredProducts} />}
     </>
   );
 }
