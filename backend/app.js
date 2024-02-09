@@ -5,9 +5,13 @@ const initializePassport  = require("./auth/passport-config");
 const passport = require("passport");
 const session = require("./auth/session-config");
 require("dotenv").config();
-
+const cors = require("cors");
 // logging middleware
 app.use(morgan("dev"));
+
+// Enable CORS
+app.use(cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
