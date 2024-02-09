@@ -21,16 +21,28 @@ export const HeroBanner = () => {
           pl: 2,
           backgroundColor: "rgba(0, 0, 0, 0.5)",
         }}
-        
       >
-        <Typography variant="h1" sx={{ color: "white", textAlign: "center" }}>
+        <Typography
+          variant="h1"
+          sx={{
+            color: "white",
+            textAlign: "center",
+            fontSize: {
+              xs: "2.5rem",
+              sm: "3rem",
+              md: "4rem",
+              lg: "5rem",
+              xl: "6rem",
+            },
+          }}
+        >
           Welcome to E-Pern
         </Typography>
         <Typography
           variant="h4"
           sx={{ color: "white", textAlign: "center", mt: 2 }}
         >
-            Your one-stop shop for all your needs
+          Your one-stop shop for all your needs
         </Typography>
         <Button
           variant="contained"

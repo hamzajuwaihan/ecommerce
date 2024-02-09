@@ -1,16 +1,36 @@
 import { PropTypes } from "prop-types";
+import { Box, Typography } from "@mui/material";
+import CarouselComponent from "../Carousel/Carousel";
 
 const FeaturedProducts = ({ products }) => {
   return (
     <>
-      <h1>Featured Products</h1>
-      <div>
-        {products.map((product) => (
-          <div key={product.id}>
-            <h2>{product.name}</h2>
-          </div>
-        ))}
-      </div>
+      <Typography
+        variant="h4"
+        gutterBottom
+        mt={2}
+        textAlign={"center"}
+        sx={{
+          fontStyle: "italic",
+          fontWeight: "bold",
+          textDecoration: "underline",
+        }}
+      >
+        Featured Products
+      </Typography>
+      <Typography
+        variant="body1"
+        textAlign={"center"}
+        mb={2}
+        sx={{
+          fontStyle: "italic",
+        }}
+      >
+        Check out our featured products
+      </Typography>
+      <Box>
+        <CarouselComponent products={products} />
+      </Box>
     </>
   );
 };
