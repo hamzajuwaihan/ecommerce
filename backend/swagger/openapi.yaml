@@ -180,7 +180,9 @@ paths:
                   type: string
                 password:
                   type: string
-      description: 'This route enables user to login to website thus having its own cookie that includes a session id.'
+      description: >-
+        This route enables user to login to website thus having its own cookie
+        that includes a session id.
       operationId: Login
       responses:
         '200':
@@ -193,7 +195,6 @@ paths:
                     {
                         "message": "Login successful"
                     }
-          
         default:
           description: Default error sample response
       tags:
@@ -201,7 +202,7 @@ paths:
   /api/auth/logout:
     delete:
       summary: Route for logging out
-      description: 'This route logs out the authenticated user, clearing the session.'
+      description: This route logs out the authenticated user, clearing the session.
       operationId: Logout
       responses:
         '200':
@@ -248,7 +249,7 @@ paths:
                   type: string
                 password:
                   type: string
-      description: 'This route allows a new user to register.'
+      description: This route allows a new user to register.
       operationId: Register
       responses:
         '201':
@@ -285,3 +286,26 @@ paths:
           description: Default error sample response
       tags:
         - Authentication
+  /api/categories:
+    summary: related to products categories.
+    get:
+      summary: get all main categories.
+      description: ''
+      tags:
+        - Products Categories
+      responses:
+        '200':
+          description: all categories response.
+          content:
+            application/json:
+              examples:
+                success retrieve of all categories:
+                  value: >-
+                    [{"id":1,"category_name":"Electronics"},{"id":2,"category_name":"Clothing"},{"id":3,"category_name":"Books"}]
+        '500':
+          description: something went wrong.
+          content:
+            application/json:
+              examples:
+                error:
+                  value: '{"message": "Server Internal Error"}'

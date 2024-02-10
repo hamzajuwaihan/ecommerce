@@ -99,7 +99,7 @@ function CarouselComponent(props) {
               style={{
                 padding: "10px",
                 minWidth: "150px",
-                height: "400px",
+                height: "450px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
@@ -115,7 +115,7 @@ function CarouselComponent(props) {
                 <Typography gutterBottom variant="h5" component="div">
                   {product.product_name}
                 </Typography>
-              
+
                 <Chip
                   label={product.category_name}
                   sx={{
@@ -158,7 +158,7 @@ function CarouselComponent(props) {
           disabled={
             currentSlide === Math.ceil(products.length / numVisibleProducts) - 1
           }
-          style={{ marginLeft: "10px" }}
+          sx={{ marginLeft: "10px", marginBottom: "20px" }}
         >
           <ArrowForward
             sx={{

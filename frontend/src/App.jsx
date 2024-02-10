@@ -1,33 +1,28 @@
-import {
-  Route,
-  RouterProvider,
-  createBrowserRouter,
-  createRoutesFromElements,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/header/Header";
 import { HeroBanner } from "./components/HeroBanner/HeroBanner";
 import FeaturedProductsContainer from "./components/FeaturedProducts/FeaturedProductsContainer";
-
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route
-      path="/"
-      element={
-        <>
-          <HeroBanner />
-          <FeaturedProductsContainer />
-        </>
-      }
-    ></Route>
-  )
-);
-
+import CategoriesListGridContainer from "./components/Categories/CategoriesListGridContainer";
+import LoginFormContainer from "./components/Login/LoginFormContainer";
 function App() {
   return (
-    <>
+    <Router>
       <Header />
-      <RouterProvider router={router} />
-    </>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <HeroBanner />
+              <FeaturedProductsContainer />
+              <CategoriesListGridContainer />
+            </>
+          }
+        />
+        <Route path="/login" element={<LoginFormContainer />} />{" "}
+        {/* Route for login page */}
+      </Routes>
+    </Router>
   );
 }
 

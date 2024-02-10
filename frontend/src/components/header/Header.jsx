@@ -11,7 +11,9 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LoginIcon from "@mui/icons-material/Login";
+import { useNavigate } from "react-router";
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <AppBar
       position="static"
@@ -61,6 +63,9 @@ const Header = () => {
               }}
             />
           }
+          onClick={() => {
+            navigate("/login");
+          }}
         >
           Login
         </Button>
